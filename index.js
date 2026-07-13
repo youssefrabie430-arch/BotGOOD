@@ -659,6 +659,35 @@ if (message.content.startsWith(prefix + 'tax')) {
 }
 
 
+    else if (command === 'help') {
+    const helpEmbed = new EmbedBuilder()
+        .setColor('#2b2d31')
+        .setTitle('🛒 | Handom Robux - مركز المساعدة')
+        .setDescription('أهلاً بك! هذا النظام المخصص لخدمات الروبكس. إليك قائمة الأوامر المتاحة:')
+        .addFields(
+            { 
+                name: '💰 | خدمات التجارة والحسابات', 
+                value: '`-r [الكمية]` : حاسبة الروبكس (سعر الوحدة)\n`-a [الكريدت]` : الحاسبة العكسية\n`-egp [المبلغ]` : تحويل الجنيه لروبكس\n`-rbx [العدد]` : تحويل الروبكس لجنيه', 
+                inline: false 
+            },
+            { 
+                name: '🎮 | نظام التحديات والجوائز', 
+                value: '`-تحدي` : العب ضد البوت\n`-منافسة @user` : تحدي صديقك\n`-رصيد` : عرض محفظتك\n`-شوب` : استبدال الفوز بروبكس\n`-توب` : المتصدرين', 
+                inline: false 
+            },
+            { 
+                name: '⚙️ | أوامر التحكم والإدارة', 
+                value: '`-stock` : عرض الرصيد المتوفر\n`-ملفي` : سجل إنجازاتك\n`-فحص [الكود]` : فحص حالة طلبك\n`-تم [الكود]` : تسليم الطلب (أونر)\n`-اضافة @user [النقاط]` : إضافة نقاط (أدمن)', 
+                inline: false 
+            }
+        )
+        .setThumbnail(message.guild.iconURL({ dynamic: true }))
+        .setFooter({ text: 'Handom Robux | تجارة آمنة وسريعة', iconURL: message.client.user.displayAvatarURL() })
+        .setTimestamp();
+
+    return message.reply({ embeds: [helpEmbed] });
+}
+
     if (command === 'buy') {
         const gamepassId = args[0];
         const price = args[1];
