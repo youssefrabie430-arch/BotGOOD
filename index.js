@@ -437,52 +437,52 @@ else if (command === 'منافسة') {
         const choices = new Map();
         const gameCollector = gameMsg.createMessageComponentCollector({ time: 60000 });
 
-       gameCollector.on('collect', async g => {
-    if (g.user.id !== message.author.id && g.user.id !== opponent.id) 
-        return g.reply({ content: 'أنت مش طرف في التحدي!', ephemeral: true });
-    
-    if (choices.has(g.user.id)) 
-        return g.reply({ content: 'لقد اخترت بالفعل!', ephemeral: true });
+        gameCollector.on('collect', async g => {
+            if (g.user.id !== message.author.id && g.user.id !== opponent.id) 
+                return g.reply({ content: 'أنت مش طرف في التحدي!', ephemeral: true });
+            
+            if (choices.has(g.user.id)) 
+                return g.reply({ content: 'لقد اخترت بالفعل!', ephemeral: true });
 
-    choices.set(g.user.id, g.customId);
-    
-    // الرد هنا لازم يكون ephemeral عشان ميبوظش شكل الرسالة الأساسية
-    await g.reply({ content: '✅ تم تسجيل اختيارك!', ephemeral: true });
+            choices.set(g.user.id, g.customId);
+            await g.reply({ content: '✅ تم تسجيل اختيارك!', ephemeral: true });
 
-    if (choices.size === 2) {
-        gameCollector.stop(); // إيقاف الـ collector عشان مياخدش اختيارات تانية
-        
-        const p1 = message.author.id;
-        const p2 = opponent.id;
-        const c1 = choices.get(p1);
-        const c2 = choices.get(p2);
+            if (choices.size === 2) {
+                gameCollector.stop();
+                
+                const p1 = message.author.id;
+                const p2 = opponent.id;
+                const c1 = choices.get(p1);
+                const c2 = choices.get(p2);
 
-        let winnerId = null;
-        let result = '';
+                let winnerId = null;
+                let result = '';
 
-        if (c1 === c2) {
-            result = '🤝 تعادل!';
-        } else if ((c1 === 'rock' && c2 === 'scissors') || (c1 === 'paper' && c2 === 'rock') || (c1 === 'scissors' && c2 === 'paper')) {
-            result = `🎉 الفائز هو <@${p1}>!`;
-            winnerId = p1;
-        } else {
-            result = `🎉 الفائز هو <@${p2}>!`;
-            winnerId = p2;
-        }
+                if (c1 === c2) {
+                    result = '🤝 تعادل!';
+                } else if ((c1 === 'rock' && c2 === 'scissors') || (c1 === 'paper' && c2 === 'rock') || (c1 === 'scissors' && c2 === 'paper')) {
+                    result = `🎉 الفائز هو <@${p1}>!`;
+                    winnerId = p1;
+                } else {
+                    result = `🎉 الفائز هو <@${p2}>!`;
+                    winnerId = p2;
+                }
 
-        if (winnerId) {
-            rpsData[winnerId] = (rpsData[winnerId] || 0) + 1;
-            saveStats();
-        }
+                if (winnerId) {
+                    rpsData[winnerId] = (rpsData[winnerId] || 0) + 1;
+                    saveStats();
+                }
 
-        const translate = { 'rock': '🪨 حجرة', 'paper': '📄 ورقة', 'scissors': '✂️ مقص' };
+                const translate = { 'rock': '🪨 حجرة', 'paper': '📄 ورقة', 'scissors': '✂️ مقص' };
 
-        await gameMsg.edit({ 
-            content: `🏁 **النتيجة:**\n<@${p1}>: **${translate[c1]}**\n<@${p2}>: **${translate[c2]}**\n\n# ${result}\n\n🏆 ${winnerId ? `تم إضافة فوز لـ <@${winnerId}>` : ''}`, 
-            components: [] 
+                await gameMsg.edit({ 
+                    content: `🏁 **النتيجة:**\n<@${p1}>: **${translate[c1]}**\n<@${p2}>: **${translate[c2]}**\n\n# ${result}\n\n🏆 ${winnerId ? `تم إضافة فوز لـ <@${winnerId}>` : ''}`, 
+                    components: [] 
+                });
+            }
         });
-    }
-});
+    });
+}
 
 // --- أمر الفحص (للأدمن والأونر) ---
 else if (command === 'فحص') {
