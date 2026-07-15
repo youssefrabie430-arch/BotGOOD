@@ -606,21 +606,6 @@ else if (command === 'اظهار') {
         .catch(err => message.reply('❌ حصل خطأ، تأكد من صلاحيات البوت!'));
 }
 
-else if (command === 'ticket') {
-    const channelName = `order-${message.author.username}`;
-    message.guild.channels.create({
-        name: channelName,
-        type: 0, // Text Channel
-        permissionOverwrites: [
-            { id: message.guild.id, deny: ['ViewChannel'] },
-            { id: message.author.id, allow: ['ViewChannel', 'SendMessages'] },
-            { id: message.guild.roles.cache.find(r => r.name === 'Admin').id, allow: ['ViewChannel', 'SendMessages'] }
-        ]
-    }).then(channel => {
-        message.reply(`تم فتح تذكرة خاصة بك في: ${channel}`);
-        channel.send(`مرحباً ${message.author}، الإدارة ستصلك قريباً. يرجى كتابة تفاصيل طلبك.`);
-    });
-}
 
 
 // --- جوه الجزء الخاص بالأوامر ---
