@@ -555,7 +555,7 @@ else if (command === 'اضافة') {
     const target = message.mentions.members.first();
     const points = parseInt(args[1]);
     
-    if (!target || !points) return message.reply('⚠️ الاستخدام: `!إضافة_نقاط @العميل 500`');
+    if (!target || !points) return message.reply('⚠️ الاستخدام: `-إضافة_نقاط @العميل 500`');
 
     // تحديث البيانات
     vipData[target.id] = (vipData[target.id] || 0) + points;
@@ -614,7 +614,7 @@ else if (command === 'اظهار') {
 
 if (command === 'egp') {
     const amount = parseFloat(args[0]);
-    if (!amount) return message.reply('استخدم: !egp [المبلغ]');
+    if (!amount) return message.reply('استخدم: -egp [المبلغ]');
     
     const result = (amount / pricePerRobux).toFixed(0);
     
@@ -628,7 +628,7 @@ if (command === 'egp') {
 
 else if (command === 'rbx') {
     const amount = parseFloat(args[0]);
-    if (!amount) return message.reply('استخدم: !rbx [عدد الروبكس]');
+    if (!amount) return message.reply('استخدم: -rbx [عدد الروبكس]');
     
     // استخدام Math.round للجنيه عشان يشيل الفواصل، و toFixed(1) للكريبتو
     const priceInEGP = Math.round(amount * pricePerRobux);
@@ -641,6 +641,24 @@ else if (command === 'rbx') {
 
 بالمصري: ${priceInEGP} EGP
 بالكريبتو: $${priceInCrypto} USDT
+        `)
+        .setColor('#2b2d31');
+
+    message.reply({ embeds: [embed] });
+}
+
+    else if (command === 'usdt') {
+    const amount = parseFloat(args[0]);
+    if (!amount) return message.reply('استخدم: -usdt [المبلغ بالدولار]');
+    
+    const robuxAmount = Math.round(amount / cryptoRate);
+    
+    const embed = new EmbedBuilder()
+        .setTitle('حاسبة تحويل الكريبتو')
+        .setDescription(`
+مبلغ $${amount} يوفر لك:
+
+${robuxAmount} Robux
         `)
         .setColor('#2b2d31');
 
