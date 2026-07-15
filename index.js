@@ -631,14 +631,17 @@ else if (command === 'rbx') {
     if (!amount) return message.reply('استخدم: !rbx [عدد الروبكس]');
     
     const priceInEGP = (amount * pricePerRobux).toFixed(2);
-    const priceInCrypto = (amount * cryptoRate).toFixed(4); // حساب الكريبتو
+    const priceInCrypto = (amount * cryptoRate).toFixed(4);
     
     const embed = new EmbedBuilder()
-        .setTitle('حاسبة التحويل')
+        .setTitle('حاسبة تحويل الروبوكس')
         .setDescription(`
-عدد **${amount}** Robux يساوي:
-💵 بالجنيه المصري: **${priceInEGP} EGP**
-🪙 بالكريبتو (USDT): **${priceInCrypto} USDT**
+💎 **الكمية:** ${amount} Robux
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+💵 **بالمصري:** ${priceInEGP} EGP
+🪙 **بالكريبتو:** ${priceInCrypto} USDT
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+*تواصل مع الإدارة لإتمام العملية*
         `)
         .setColor('#2b2d31');
 
