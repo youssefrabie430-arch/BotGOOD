@@ -682,6 +682,15 @@ if (message.content.startsWith(prefix + 'tax')) {
     message.channel.send({ embeds: [embed] });
 }
 
+    else if (command === 'say') {
+    if (!message.member.permissions.has('Administrator')) return;
+    const text = args.join(' ');
+    if (!text) return message.reply('اكتب الرسالة');
+    
+    message.delete();
+    message.channel.send(text);
+}
+
 
 else if (command === 'help') {
     const helpEmbed = new EmbedBuilder()
