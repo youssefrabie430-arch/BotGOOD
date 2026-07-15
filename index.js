@@ -2,8 +2,8 @@ const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder
 const noblox = require('noblox.js');
 const axios = require('axios');
 const { createCanvas, loadImage } = require('canvas');
-const pricePerRobux = 0.30; // ده سعر الروبكس الواحد بالجنيه
-const cryptoRate = 0.006;
+const pricePerRobux = 0.25; // ده سعر الروبكس الواحد بالجنيه
+const cryptoRate = 0.005;
 
 const client = new Client({
     intents: [
