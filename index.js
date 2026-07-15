@@ -607,6 +607,31 @@ else if (command === 'اظهار') {
 }
 
 
+    // مصفوفة لتخزين الـ IDs (هتتصفر لو البوت عمل ريستارت)
+let alertList = []; 
+
+// أمر تسجيل العميل
+else if (command === 'تنبيه') {
+    if (alertList.includes(message.author.id)) {
+        return message.reply('أنت بالفعل مسجل في قائمة التنبيهات.');
+    }
+    alertList.push(message.author.id);
+    message.reply('تم تسجيلك في قائمة التنبيهات. سيصلك إشعار فور توفر الكمية.');
+}
+
+// أمر إرسال التنبيه (للأدمن فقط)
+else if (command === 'ارسال') {
+    if (!message.member.permissions.has('Administrator')) return;
+    
+    alertList.forEach(userId => {
+        client.users.fetch(userId).then(user => {
+            user.send('الروبوكس متوفر الآن! اطلب طلبك من السيرفر.');
+        }).catch(err => console.log('تعذر إرسال رسالة لـ ' + userId));
+    });
+    
+    message.reply(`تم إرسال التنبيه لـ ${alertList.length} مستخدم.`);
+    alertList = []; // تفريغ القائمة بعد الإرسال
+}
 
 
 
