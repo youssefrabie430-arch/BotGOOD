@@ -691,13 +691,14 @@ if (message.content.startsWith(prefix + 'tax')) {
     message.channel.send(text);
 }
 
-        else if (command === 'امبيد') {
+else if (command === 'امبيد') {
     if (!message.member.permissions.has('Administrator')) return;
     const text = args.join(' ');
-    if (!text) return message.reply('اكتب نص الرسالة للإمبيد');
+    if (!text) return message.reply('اكتب الرسالة');
     
     const embed = new EmbedBuilder()
-        .setDescription(text)
+        .setTitle('Handom Robux') // عنوان ثابت وشيك
+        .setDescription(text)    // الرسالة اللي إنت بتكتبها بتظهر هنا
         .setColor('#2b2d31');
     
     message.delete();
