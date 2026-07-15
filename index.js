@@ -630,24 +630,22 @@ else if (command === 'rbx') {
     const amount = parseFloat(args[0]);
     if (!amount) return message.reply('استخدم: !rbx [عدد الروبكس]');
     
-    const priceInEGP = (amount * pricePerRobux).toFixed(2);
-    const priceInCrypto = (amount * cryptoRate).toFixed(4);
+    // استخدام Math.round للجنيه عشان يشيل الفواصل، و toFixed(1) للكريبتو
+    const priceInEGP = Math.round(amount * pricePerRobux);
+    const priceInCrypto = (amount * cryptoRate).toFixed(1); 
     
     const embed = new EmbedBuilder()
         .setTitle('حاسبة تحويل الروبوكس')
         .setDescription(`
-💎 **الكمية:** ${amount} Robux
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-💵 **بالمصري:** ${priceInEGP} EGP
-🪙 **بالكريبتو:** ${priceInCrypto} USDT
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-*تواصل مع الإدارة لإتمام العملية*
+الكمية: ${amount} Robux
+
+بالمصري: ${priceInEGP} EGP
+بالكريبتو: $${priceInCrypto} USDT
         `)
         .setColor('#2b2d31');
 
     message.reply({ embeds: [embed] });
 }
-
 
 if (message.content.startsWith(prefix + 'tax')) {
     const args = message.content.split(' ');
