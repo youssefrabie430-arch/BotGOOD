@@ -691,6 +691,19 @@ if (message.content.startsWith(prefix + 'tax')) {
     message.channel.send(text);
 }
 
+        else if (command === 'امبيد') {
+    if (!message.member.permissions.has('Administrator')) return;
+    const text = args.join(' ');
+    if (!text) return message.reply('اكتب نص الرسالة للإمبيد');
+    
+    const embed = new EmbedBuilder()
+        .setDescription(text)
+        .setColor('#2b2d31');
+    
+    message.delete();
+    message.channel.send({ embeds: [embed] });
+}
+
 
 else if (command === 'help') {
     const helpEmbed = new EmbedBuilder()
