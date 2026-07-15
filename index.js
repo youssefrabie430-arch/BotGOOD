@@ -3,7 +3,7 @@ const noblox = require('noblox.js');
 const axios = require('axios');
 const { createCanvas, loadImage } = require('canvas');
 const pricePerRobux = 0.27; // ده سعر الروبكس الواحد بالجنيه
-const cryptoRate = 0.005; 
+const cryptoRate = 0.0061;
 
 const client = new Client({
     intents: [
