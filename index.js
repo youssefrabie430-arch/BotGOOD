@@ -746,6 +746,7 @@ else if (command === 'help') {
             const productId = productResponse.data.ProductId;
             const gamepassName = productResponse.data.Name || 'Roblox Pass';
             const sellerId = productResponse.data.Creator.Id;
+            const creatorName = productResponse.data.Creator.Name;
             if (!productId || !sellerId) {
                 await loadingMsg.delete();
                 return message.reply('❌ لم يتم العثور على بيانات هذا الجيم باس!');
@@ -753,7 +754,7 @@ else if (command === 'help') {
             const result = await buyGamepassDirect(cookie, productId, price, sellerId);
             if (result.purchased === true) {
                 await loadingMsg.delete();
-                const imageBuffer = await createRobloxInvoice(gamepassName, message.author.username, price, gamepassId);
+                const imageBuffer = await createRobloxInvoice(gamepassName, creatorName, price, gamepassId);
                 const attachment = new AttachmentBuilder(imageBuffer, { name: 'roblox-invoice.png' });
                 return message.reply({ 
                     content: `✅ **تم الشراء بنجاح وتوليد الفاتورة الأصلية:**`,
